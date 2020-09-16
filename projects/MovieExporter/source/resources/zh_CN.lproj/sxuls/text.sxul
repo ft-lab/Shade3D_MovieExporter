@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<strings>
+	<string id="product_name" value="Movie Exporter"/>
+	<string id="author" value="ft-lab."/>
+	<string id="company" value="ft-lab."/>
+	<string id="comments" value="Movie Exporter"/>
+
+	<string id="movie_image_exporter_title" value="movie(mp4/webm)"/>
+	<string id="msg_error_VideoOutputFailed" value="Video output failed."/>
+</strings>
