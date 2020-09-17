@@ -7,7 +7,7 @@
 #include "GlobalHeader.h"
 #include "MovieData.h"
 
-#include "opencv2/Videoio.hpp"
+#include "opencv2/videoio.hpp"
 #include "opencv2/core.hpp"
 
 class CExportMovieWithOpenCV
