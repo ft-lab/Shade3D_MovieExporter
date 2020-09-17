@@ -42,7 +42,7 @@ bool CExportMovieWithOpenCV::init (const MovieData::CMovieData& movieData, const
 #if _WINDOWS
 		fourcc = cv::VideoWriter::fourcc('H','2','6','4');		// Win環境の場合.
 #else
-		fourcc = cv::VideoWriter::fourcc('M','P','4','V');		// Mac環境の場合.
+		fourcc = cv::VideoWriter::fourcc('a','v','c','1');		// Mac環境の場合.
 #endif
 		//fourcc = cv::VideoWriter::fourcc('H','E','V','C');		// H.265 (OpenCVでは動作せず？).
 	} else {
