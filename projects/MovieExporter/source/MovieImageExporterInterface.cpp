@@ -26,7 +26,7 @@ CMovieImageExporterInterface::CMovieImageExporterInterface (sxsdk::shade_interfa
 	m_tempFilePath = "";
 	m_exportFilePath = "";
 	m_criticalScetion = shade.create_critical_section_interface();
-	m_stream = NULL;
+	m_needCopyFile = false;
 }
 
 CMovieImageExporterInterface::~CMovieImageExporterInterface ()
@@ -66,6 +66,7 @@ void CMovieImageExporterInterface::cleanup (void *)
 bool CMovieImageExporterInterface::do_pre_export (int index, sxsdk::image_interface *image, void*)
 {
 	m_frame = 0;
+	m_needCopyFile = false;
 
 	// 動画の種類.
 	MovieData::MOVIE_TYPE movieType = (index == 0) ? MovieData::MOVIE_TYPE::movie_type_mp4 : MovieData::MOVIE_TYPE::movie_type_webm;
@@ -119,14 +120,10 @@ bool CMovieImageExporterInterface::do_pre_export (int index, sxsdk::image_interf
 	return ret;
 }
 
-/**
- * 1フレームごとのエクスポート.
- */
 bool CMovieImageExporterInterface::do_export (int index, sxsdk::image_interface *image, sxsdk::stream_interface *stream, void*)
 {
 	if (stream && m_exportFilePath == "") {
 		m_exportFilePath = std::string(stream->get_file_path());
-		m_stream = stream;
 	}
 
 	// 動画の画像を追加.
@@ -147,17 +144,28 @@ bool CMovieImageExporterInterface::do_post_export (int index, sxsdk::image_inter
 	// 動画の格納終了.
 	m_criticalScetion->enter();
 	m_exportMovie->term();
+	m_needCopyFile = true;
 	m_criticalScetion->leave();
 
-	// ファイルを複製する.
-	if (m_tempFilePath != "" && m_exportFilePath != "") {
-		try {
-			shade.copy_file(m_tempFilePath.c_str(), m_exportFilePath.c_str());
-
-		} catch (...) { }
-	}
-
 	return true;
+}
+
+void CMovieImageExporterInterface::idle_task (bool &b, sxsdk::scene_interface *scene, void *)
+{
+	if (m_needCopyFile) {
+		// ファイルを複製する.
+		// do_post_exportで作業ファイルを複製する処理を行うと、Mac環境でstreamをつかんでいるからかコピーに失敗する.
+		// そのためレンダリングがすべて完了した後に時間差でファイルコピーするようにidleを使う.
+		m_criticalScetion->enter();
+		if (m_tempFilePath != "" && m_exportFilePath != "") {
+			try {
+				shade.delete_file(m_exportFilePath.c_str());		// Macの場合はこれがないとcopy_fileはうまくいかない.
+				shade.copy_file(m_tempFilePath.c_str(), m_exportFilePath.c_str());
+			} catch (...) { }
+		}
+		m_needCopyFile = false;
+		m_criticalScetion->leave();
+	}
 }
 
 

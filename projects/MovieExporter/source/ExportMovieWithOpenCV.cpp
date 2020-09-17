@@ -39,8 +39,12 @@ bool CExportMovieWithOpenCV::init (const MovieData::CMovieData& movieData, const
 	int fourcc = 0;
 	if (movieData.movieType == MovieData::MOVIE_TYPE::movie_type_mp4) {
 		// CODECでH264を指定。この場合、openh264がいるらしいがなくても動作した.
-		fourcc = cv::VideoWriter::fourcc('H','2','6','4');
-		//fourcc = cv::VideoWriter::fourcc('H','E','V','C');		// H.265
+#if _WINDOWS
+		fourcc = cv::VideoWriter::fourcc('H','2','6','4');		// Win環境の場合.
+#else
+		fourcc = cv::VideoWriter::fourcc('M','P','4','V');		// Mac環境の場合.
+#endif
+		//fourcc = cv::VideoWriter::fourcc('H','E','V','C');		// H.265 (OpenCVでは動作せず？).
 	} else {
 		if (movieData.webmCodec == MovieData::WEBM_CODEC_TYPE::webm_codec_vp8) {
 			fourcc = cv::VideoWriter::fourcc('V','P','0','8');
