@@ -30,7 +30,6 @@ OpenCVのReleasesページ ( https://opencv.org/releases/ )より、
 
 ## プラグインをpluginsフォルダに複製
 
-Shade3Dのpluginsフォルダ（/Users/ユーザ名/Documents/Shade3D/Shade3D ver.17/plugins など）に「MovieExporter.shdplugin」を複製します。    
 プラグイン本体の「MovieExporter64.dll」をShade3Dのpluginsフォルダにコピーします。    
 Shade3D ver.17の場合は、初期状態では「C:\Users\ユーザ名\Documents\Shade3D\Shade3D ver.17\plugins」がpluginsフォルダになります。    
 
