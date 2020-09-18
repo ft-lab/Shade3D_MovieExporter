@@ -15,7 +15,6 @@ struct CMovieImageExporterInterface : public sxsdk::image_exporter_interface
 {
 private:
 	sxsdk::shade_interface& shade;
-	int m_frame;
 
 	std::unique_ptr<CExportMovieWithOpenCV> m_exportMovie;			// OpenCVを使った動画出力クラス.
 
@@ -26,8 +25,6 @@ private:
 	compointer<sxsdk::critical_section_interface> m_criticalScetion;
 
 	MovieData::CMovieData m_data;					// 動画オプション.
-
-	bool m_needCopyFile;							// ファイルコピーの必要がある場合はtrue.
 
 private:
 
@@ -57,11 +54,6 @@ private:
 	// use_custom_exportはShade3D本体から呼ばれない ?
 	//virtual bool use_custom_export (int index, void *);
 	//virtual bool do_export_custom (int index, sxsdk::image_interface* image, const std::string& path, sxsdk::scene_interface* scene, void*);
-
-	/**
-	 * idle時に定期的に呼ばれる.
-	 */
-	virtual void idle_task (bool &b, sxsdk::scene_interface *scene, void *aux=0);
 
 	/**
 	 * アプリケーション終了時に呼ばれる.

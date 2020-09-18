@@ -21,12 +21,10 @@ enum {
 
 CMovieImageExporterInterface::CMovieImageExporterInterface (sxsdk::shade_interface& shade) : shade(shade)
 {
-	m_frame = 0;
 	m_tempDirPath = "";
 	m_tempFilePath = "";
 	m_exportFilePath = "";
 	m_criticalScetion = shade.create_critical_section_interface();
-	m_needCopyFile = false;
 }
 
 CMovieImageExporterInterface::~CMovieImageExporterInterface ()
@@ -65,9 +63,6 @@ void CMovieImageExporterInterface::cleanup (void *)
  */
 bool CMovieImageExporterInterface::do_pre_export (int index, sxsdk::image_interface *image, void*)
 {
-	m_frame = 0;
-	m_needCopyFile = false;
-
 	// 動画の種類.
 	MovieData::MOVIE_TYPE movieType = (index == 0) ? MovieData::MOVIE_TYPE::movie_type_mp4 : MovieData::MOVIE_TYPE::movie_type_webm;
 
@@ -120,6 +115,9 @@ bool CMovieImageExporterInterface::do_pre_export (int index, sxsdk::image_interf
 	return ret;
 }
 
+/**
+ * 1フレームごとに動画出力.
+ */
 bool CMovieImageExporterInterface::do_export (int index, sxsdk::image_interface *image, sxsdk::stream_interface *stream, void*)
 {
 	if (stream && m_exportFilePath == "") {
@@ -131,8 +129,6 @@ bool CMovieImageExporterInterface::do_export (int index, sxsdk::image_interface 
 	m_exportMovie->addImage(image);
 	m_criticalScetion->leave();
 
-	m_frame++;
-
 	return true;
 }
 
@@ -141,33 +137,23 @@ bool CMovieImageExporterInterface::do_export (int index, sxsdk::image_interface 
  */
 bool CMovieImageExporterInterface::do_post_export (int index, sxsdk::image_interface *image, void*)
 {
-	// 動画の格納終了.
 	m_criticalScetion->enter();
+
+	// 動画の格納終了.
 	m_exportMovie->term();
-	m_needCopyFile = true;
+
+	// 作業用に出力したファイルをm_exportFilePathへコピーする.
+	if (m_tempFilePath != "" && m_exportFilePath != "") {
+		try {
+			shade.delete_file(m_exportFilePath.c_str());		// Macの場合はこれがないとcopy_fileはうまくいかない.
+			shade.copy_file(m_tempFilePath.c_str(), m_exportFilePath.c_str());
+		} catch (...) { }
+	}
+
 	m_criticalScetion->leave();
 
 	return true;
 }
-
-void CMovieImageExporterInterface::idle_task (bool &b, sxsdk::scene_interface *scene, void *)
-{
-	if (m_needCopyFile) {
-		// ファイルを複製する.
-		// do_post_exportで作業ファイルを複製する処理を行うと、Mac環境でstreamをつかんでいるからかコピーに失敗する.
-		// そのためレンダリングがすべて完了した後に時間差でファイルコピーするようにidleを使う.
-		m_criticalScetion->enter();
-		if (m_tempFilePath != "" && m_exportFilePath != "") {
-			try {
-				shade.delete_file(m_exportFilePath.c_str());		// Macの場合はこれがないとcopy_fileはうまくいかない.
-				shade.copy_file(m_tempFilePath.c_str(), m_exportFilePath.c_str());
-			} catch (...) { }
-		}
-		m_needCopyFile = false;
-		m_criticalScetion->leave();
-	}
-}
-
 
 //--------------------------------------------------.
 //  ダイアログのイベント処理用.

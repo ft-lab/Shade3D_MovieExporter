@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<dialog default_button="true" title="動画情報">
+<dialog default_button="true" title="Video Information">
 	<group id="1000" label="" swap_boxes="true" >
 		<vbox id="100" label="mp4">
 			<selection id="101" label="CODEC : |H.264" />
