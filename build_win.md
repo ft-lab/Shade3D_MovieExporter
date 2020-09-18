@@ -2,7 +2,7 @@
 
 ## Windows
 
-プラグインのビルドは、Visual Studio 2017を使用しC++を使いました。    
+プラグインのビルドは、Visual Studio 2017でC++を使いました。    
 
 ## OpenCVのインストール
 
@@ -29,11 +29,44 @@
 
 ## Shade3DプラグインSDKでのプロジェクトとして配置
 
-### VC++2017のプロジェクトでの指定
+Shade3DプラグインSDKをダウンロードします。    
+Shade3D_MovieExporter/projects/MovieExporterフォルダをShade3DのプラグインSDKのplugin_projectsフォルダに複製します。    
 
-VC++2017で、    
-ヘッダの検索パスに「opencv-4.3.0/include」を追加、
-ライブラリの検索パスに「opencv-4.3.0/build/x64/vc15/lib」を追加します。    
+以下のような配置になります。    
 
-TODO...
+    [shade 15 Plugin SDK]
+        [plugin_projects]
+            [MovieExporter]
+                [mac]
+                [source]
+                [win_vs2017]
+
+「win_vs2017」がVC++2017用のプロジェクトです。    
+このフォルダ内の「MovieExporter.sln」が起動プロジェクトになります。    
+
+## VC++2017のプロジェクトでの指定
+
+OpenCVの検索パスとして、以下を参照しています。    
+
+* ヘッダの検索パス : OpenCV-4.4.0/include    
+* ライブラリの検索パス : OpenCV-4.4.0/build/x64/vc15/lib     
+
+「OpenCV-4.4.0」はOpenCVの展開先のフォルダです。    
+
+VC++2017のプロジェクトで、OpenCVのヘッダとライブラリを検索できるように指定を確認します。   
+
+ソリューションエクスプローラの「MovieExporter」を右クリックし、プロパティを選択します。    
+
+「C/C++」の「全般」の「追加のインクルードディレクトリ」で「C:\WinApp\OpenCV-4.4.0\build\include」となっている箇所がOpenCVのヘッダのパスになります。    
+環境に合わせて書き換えるようにしてください。    
+
+「リンカー」の「全般」の「追加のライブラリディレクトリ」で
+「C:\WinApp\OpenCV-4.4.0\build\x64\vc15\lib」となっている箇所がOpenCVのライブラリのパスになります。    
+環境に合わせて書き換えるようにしてください。    
+
+「リンカー」の「入力」の「追加の依存ファイル」で    
+Debug時は「opencv_world440d.lib」、Release時は「opencv_world440.lib」を指定します。     
+
+以上でビルドすると、「MovieExporter64.dll」が生成されます。    
+
 
