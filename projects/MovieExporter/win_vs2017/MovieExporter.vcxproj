@@ -177,7 +177,7 @@
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <OmitFramePointers>true</OmitFramePointers>
       <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
-      <AdditionalIncludeDirectories>$(BOOSTPATH);$(SXSDKINCLUDEPATH);$(SXSDKINCLUDEPATH)/openexr-1.6.1;$(SXSDKINCLUDEPATH)/opengl;C:\WinApp\OpenCV-4.4.0\build\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(BOOSTPATH);$(SXSDKINCLUDEPATH);$(SXSDKINCLUDEPATH)/openexr-1.6.1;$(SXSDKINCLUDEPATH)/opengl;C:\WinApp\OpenCV-4.5.0\build\include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>SXWINDOWS;SXWIN32;DEMO_PLUGIN=0;NDEBUG;sxdebug=0;WIN32;_WINDOWS;Windows=1;PLUGIN=1;STDCALL=__stdcall;DLLEXPORT=__declspec(dllexport);_CRT_SECURE_NO_DEPRECATE;SXPLUGIN=1;_SECURE_SCL=0;PLUGIN_EXPORTS;SXCORE=;SXMODEL=;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
@@ -197,10 +197,10 @@
       <Culture>0x0411</Culture>
     </ResourceCompile>
     <Link>
-      <AdditionalDependencies>opencv_world440.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opencv_world450.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <AdditionalLibraryDirectories>C:\WinApp\OpenCV-4.4.0\build\x64\vc15\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\WinApp\OpenCV-4.5.0\build\x64\vc15\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ModuleDefinitionFile>
       </ModuleDefinitionFile>
       <ProgramDatabaseFile>.\$(Configuration)\$(Platform)\$(Configuration).pdb</ProgramDatabaseFile>
@@ -248,7 +248,7 @@
       <TargetEnvironment>X64</TargetEnvironment>
     </Midl>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(BOOSTPATH);$(SXSDKINCLUDEPATH);$(SXSDKINCLUDEPATH)/openexr-1.6.1;$(SXSDKINCLUDEPATH)/opengl;C:\WinApp\OpenCV-4.4.0\build\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(BOOSTPATH);$(SXSDKINCLUDEPATH);$(SXSDKINCLUDEPATH)/openexr-1.6.1;$(SXSDKINCLUDEPATH)/opengl;C:\WinApp\OpenCV-4.5.0\build\include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>SXWINDOWS;SXWIN32;DEMO_PLUGIN=0;DEBUG;sxdebug=0;WIN32;_WINDOWS;Windows=1;PLUGIN=1;STDCALL=__stdcall;DLLEXPORT=__declspec(dllexport);_CRT_SECURE_NO_DEPRECATE;_SECURE_SCL=0;SXPLUGIN=1;PLUGIN_EXPORTS;SXCORE=;SXMODEL=;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -261,9 +261,9 @@
       <PrecompiledHeaderOutputFile>.\$(IntDir)$(Configuration).pch</PrecompiledHeaderOutputFile>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>opencv_world440d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opencv_world450d.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
-      <AdditionalLibraryDirectories>C:\WinApp\OpenCV-4.4.0\build\x64\vc15\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\WinApp\OpenCV-4.5.0\build\x64\vc15\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AssemblyDebug>true</AssemblyDebug>
       <ProgramDatabaseFile>\$(Configuration)\$(Platform)\$(Configuration).pdb</ProgramDatabaseFile>
