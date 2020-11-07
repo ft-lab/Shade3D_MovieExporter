@@ -2,7 +2,8 @@
 
 Shade3Dのアニメーションレンダリングを、mp4(H.264)またはwebm(VP8/VP9)形式で出力するプラグインです。    
 
-本プラグインは動画出力でOpenCV 4.4.0 ( https://opencv.org/ )を使用しています。    
+本プラグインは動画出力でOpenCV 4.5.0 ( https://opencv.org/ )を使用しています。    
+Win/Macともに、OpenCV 4.5.0のバージョン以外では動作しません。    
 
 ## 機能
 
@@ -78,6 +79,10 @@ H.264を使用している場合の出力動画の使用については、使い
 "AVC Patent Portfolio License" ( https://www.mpegla.com/programs/avc-h-264/license-agreement/ )も参照するようにしてください。    
 
 ## 更新履歴
+
+### [2020/11/08] ver.1.0.0.1
+
+* OpenCV 4.5.0を使用するようにした
 
 ### [2020/09/18] ver.1.0.0.0
 

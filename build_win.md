@@ -8,9 +8,9 @@
 
 「[起動方法 (Win)](./setup_win.md) 」の手順でOpenCVをWindows環境に展開しておきます。    
 
-「C:\WinApp\OpenCV-4.4.0」に解凍した場合、以下のような構成になっているのを確認します。    
+「C:\WinApp\OpenCV-4.5.0」に解凍した場合、以下のような構成になっているのを確認します。    
 
-    [OpenCV-4.4.0]
+    [OpenCV-4.5.0]
         [build]
           [bin]
           [etc]
@@ -48,24 +48,24 @@ Shade3D_MovieExporter/projects/MovieExporterフォルダをShade3Dのプラグ�
 
 OpenCVの検索パスとして、以下を参照しています。    
 
-* ヘッダの検索パス : OpenCV-4.4.0/include    
-* ライブラリの検索パス : OpenCV-4.4.0/build/x64/vc15/lib     
+* ヘッダの検索パス : OpenCV-4.5.0/include    
+* ライブラリの検索パス : OpenCV-4.5.0/build/x64/vc15/lib     
 
-「OpenCV-4.4.0」はOpenCVの展開先のフォルダです。    
+「OpenCV-4.5.0」はOpenCVの展開先のフォルダです。    
 
 VC++2017のプロジェクトで、OpenCVのヘッダとライブラリを検索できるように指定を確認します。   
 
 ソリューションエクスプローラの「MovieExporter」を右クリックし、プロパティを選択します。    
 
-「C/C++」の「全般」の「追加のインクルードディレクトリ」で「C:\WinApp\OpenCV-4.4.0\build\include」となっている箇所がOpenCVのヘッダのパスになります。    
+「C/C++」の「全般」の「追加のインクルードディレクトリ」で「C:\WinApp\OpenCV-4.5.0\build\include」となっている箇所がOpenCVのヘッダのパスになります。    
 環境に合わせて書き換えるようにしてください。    
 
 「リンカー」の「全般」の「追加のライブラリディレクトリ」で
-「C:\WinApp\OpenCV-4.4.0\build\x64\vc15\lib」となっている箇所がOpenCVのライブラリのパスになります。    
+「C:\WinApp\OpenCV-4.5.0\build\x64\vc15\lib」となっている箇所がOpenCVのライブラリのパスになります。    
 環境に合わせて書き換えるようにしてください。    
 
 「リンカー」の「入力」の「追加の依存ファイル」で    
-Debug時は「opencv_world440d.lib」、Release時は「opencv_world440.lib」を指定します。     
+Debug時は「opencv_world450d.lib」、Release時は「opencv_world450.lib」を指定します。     
 
 以上でビルドすると、「MovieExporter64.dll」が生成されます。    
 
