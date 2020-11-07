@@ -58,6 +58,7 @@ bool CExportMovieWithOpenCV::init (const MovieData::CMovieData& movieData, const
 	if (!m_viderWriter->isOpened()) return false;
 
 	// RGB 24 bitのバッファを作成.
+	// mp4はAlphaチャンネルは未対応、webmは正しく出力できなかったがAlphaを持てる ?
 	m_imgD.create(cv::Size(m_width, m_height), CV_8UC3);
 
 	return true;
@@ -89,6 +90,7 @@ void CExportMovieWithOpenCV::addImage (sxsdk::image_interface* image)
 			int iPos2 = iPos;
 			image->get_pixels_rgba(0, y, m_width, 1, &(lines[0]));
 			for (int x = 0; x < m_width; ++x) {
+				//*(m_imgD.data + iPos2 + 3) = lines[x].alpha;
 				*(m_imgD.data + iPos2 + 0) = lines[x].blue;
 				*(m_imgD.data + iPos2 + 1) = lines[x].green;
 				*(m_imgD.data + iPos2 + 2) = lines[x].red;
